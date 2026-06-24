@@ -41,6 +41,7 @@ fun SettingsScreen(
                 confirmButton = {
                     TextButton(
                         onClick = {
+                            viewModel.clearAllData()
                             showDeleteDialog = false
                             Toast.makeText(context, "داده‌ها با موفقیت پاک شدند.", Toast.LENGTH_SHORT).show()
                         }

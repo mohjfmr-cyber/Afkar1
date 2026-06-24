@@ -157,6 +157,16 @@ class ThoughtViewModel(application: Application) : AndroidViewModel(application)
         _onboardingCompleted.value = false
     }
 
+    fun clearAllData() {
+        viewModelScope.launch {
+            allRecords.value.forEach { repository.deleteRecord(it) }
+            allArticleStatuses.value.forEach { status ->
+                val statusReset = status.copy(isBookmarked = false, isRead = false)
+                repository.insertArticleStatus(statusReset)
+            }
+        }
+    }
+
     fun updateSearchQuery(query: String) {
         _searchQuery.value = query
     }
